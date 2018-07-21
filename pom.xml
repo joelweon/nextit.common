@@ -15,6 +15,41 @@
 	</properties>
 
 	<repositories>
+		<!-- Nexus 서버 설정 후 사설 Nexus 서버를 바라보도록 설정을 변경  -->
+		<!-- public 아이디로 프락시 서버, releases, snapshot  -->
+		<repository>
+			<id>public</id>
+			<url>http://localhost:8080/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		
+		<repository>
+			<id>egovframe</id>
+			<url>http://localhost:8080/nexus/content/repositories/egovframe/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>egovframe2</id>
+			<url>http://localhost:8080/nexus/content/repositories/egovframe2/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		
+		<!-- 삭제 
 		<repository>
 			<id>mvn2</id>
 			<url>http://repo1.maven.org/maven2/</url>
@@ -25,27 +60,28 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
-		<repository>
-			<id>egovframe</id>
-			<url>http://www.egovframe.go.kr/maven/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>egovframe2</id>
-			<url>http://maven.egovframe.kr:8080/maven/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
+		-->
+		
 	</repositories>
+	
+	
+	<!-- 배포될 서버 릴리즈에 대한 정보가 필요하므로 등록! -->
+	<distributionManagement>
+	<!-- version 에서 0.0.1 - "SNAPSHOT" 으로 되어 있으면 테스트 진행중 -->
+	<!-- version 에서 0.0.1 로 되어 있으면 정식배포 -->
+	
+		<!-- 정식 배포판을 배포할 경우 jar 파일 등.. -->
+		<repository>
+			<id>releases</id>
+			<url>http://localhost:8080/nexus/content/repositories/releases/</url>
+		</repository>
+		<!-- 테스트 또는 베타 버전을 배포 테스트를 진행할 경우 -->
+		<!-- 문제 발생 여지 있음 -->
+		<snapshotRepository>
+			<id>snapshots</id>
+			<url>http://localhost:8080/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<dependencies>
 		<!-- 표준프레임워크 실행환경 -->
